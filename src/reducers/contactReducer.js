@@ -1,7 +1,16 @@
-import { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT } from '../actions/types';
+import {
+  GET_CONTACTS,
+  DELETE_CONTACT,
+  ADD_CONTACT,
+  GET_CONTACT,
+  UPDATE_CONTACT
+} from '../actions/types';
 
 const initialState = {
-  contacts: []
+  // all contacts
+  contacts: [],
+  // current contact being viewed
+  contact: {}
   // contacts: [
   //   {
   //     id: 1,
@@ -31,6 +40,11 @@ const contactReducer = (state = initialState, action) => {
       return {
         ...state,
         contacts: action.payload
+      };
+    case GET_CONTACT:
+      return {
+        ...state,
+        contact: action.payload
       };
     case DELETE_CONTACT:
       // filter the state.contacts so that it removes the contact with supplied id from payload
