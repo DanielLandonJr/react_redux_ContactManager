@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getContact } from '../../actions/contactActions';
+import { getContact, updateContact } from '../../actions/contactActions';
 
 class EditContact extends Component {
   state = {
@@ -13,14 +13,18 @@ class EditContact extends Component {
   };
 
   componentWillReceiveProps(nextProps, nextState) {
+    // get prop values from nextProps
     const { name, email, phone } = nextProps.contact;
 
+    // set the local state
     this.setState({ name, email, phone });
   }
 
   componentDidMount() {
+    // get id value from props
     const { id } = this.props.match.params;
 
+    // get contact with id supplied
     this.props.getContact(id);
   }
 
@@ -45,15 +49,16 @@ class EditContact extends Component {
       return;
     }
 
-    const updContact = {
+    const { id } = this.props.match.params;
+
+    const updateOldContact = {
+      id,
       name,
       email,
       phone
     };
 
-    // const { id } = this.props.match.params;
-
-    //// UPDATE CONTACT ////
+    this.props.updateContact(updateOldContact);
 
     // Clear State
     this.setState({
@@ -115,14 +120,16 @@ class EditContact extends Component {
 
 EditContact.propTypes = {
   contact: PropTypes.object.isRequired,
-  getContact: PropTypes.func.isRequired
+  getContact: PropTypes.func.isRequired,
+  updateContact: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
+  // set contact to value listed below...this will be the props for the selected contact
   contact: state.contact.contact
 });
 
 export default connect(
   mapStateToProps,
-  { getContact }
+  { getContact, updateContact }
 )(EditContact);

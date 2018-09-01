@@ -64,6 +64,21 @@ export const addContact = contact => async dispatch => {
   }
 };
 
+export const updateContact = contact => async dispatch => {
+  try {
+    const response = await axios.put(
+      `https://jsonplaceholder.typicode.com/users/${contact.id}`,
+      contact
+    );
+    dispatch({
+      type: UPDATE_CONTACT,
+      payload: response.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // export const getContacts = () => {
 //   return {
 //     type: GET_CONTACTS
