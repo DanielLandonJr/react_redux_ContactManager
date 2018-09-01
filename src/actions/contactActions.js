@@ -4,12 +4,28 @@ import {
   ADD_CONTACT,
   EDIT_CONTACT
 } from './types';
+import axios from 'axios';
 
-export const getContacts = () => {
-  return {
-    type: GET_CONTACTS
-  };
+export const getContacts = () => async dispatch => {
+  try {
+    const response = await axios.get(
+      'https://jsonplaceholder.typicode.com/users'
+    );
+
+    dispatch({
+      type: GET_CONTACTS,
+      payload: response.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+// export const getContacts = () => {
+//   return {
+//     type: GET_CONTACTS
+//   };
+// };
 
 export const deleteContact = id => {
   return {
