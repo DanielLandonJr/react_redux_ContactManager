@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { editContact } from '../../actions/contactActions';
 
-export default class EditContact extends Component {
+class EditContact extends Component {
   state = {
     name: '',
     email: '',
@@ -97,3 +100,15 @@ export default class EditContact extends Component {
     );
   }
 }
+
+EditContact.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  editContact: PropTypes.func.isRequired
+};
+
+const mapStateToProps = () => {};
+
+export default connect(
+  mapStateToProps,
+  { editContact }
+)(EditContact);
