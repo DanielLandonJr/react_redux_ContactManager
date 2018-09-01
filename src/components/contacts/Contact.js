@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Consumer } from '../../context';
 import axios from 'axios';
 
-class Contact extends Component {
+export default class Contact extends Component {
   state = {
     showContactInfo: false
   };
@@ -12,9 +12,10 @@ class Contact extends Component {
   onDeleteClick = async (id, dispatch) => {
     try {
       await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+
       dispatch({ type: 'DELETE_CONTACT', payload: id });
-    } catch (e) {
-      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -73,5 +74,3 @@ class Contact extends Component {
 Contact.propTypes = {
   contact: PropTypes.object.isRequired
 };
-
-export default Contact;

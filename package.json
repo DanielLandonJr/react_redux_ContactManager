@@ -1,11 +1,12 @@
 {
-  "name": "contactmanager",
+  "name": "react_redux_ContactManager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.1.2",
     "classnames": "^2.2.6",
+    "gh-pages": "^1.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
@@ -16,6 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && gh-pages -d build"
+  },
+  "homepage": "https://daniellandonjr.github.io/react_redux_ContactManager/"
 }

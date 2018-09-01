@@ -3,7 +3,7 @@ import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 
-class AddContact extends Component {
+export default class AddContact extends Component {
   state = {
     name: '',
     email: '',
@@ -38,12 +38,16 @@ class AddContact extends Component {
       phone
     };
 
-    const res = await axios.post(
-      'https://jsonplaceholder.typicode.com/users',
-      newContact
-    );
+    try {
+      const response = await axios.post(
+        'https://jsonplaceholder.typicode.com/users',
+        newContact
+      );
 
-    dispatch({ type: 'ADD_CONTACT', payload: res.data });
+      dispatch({ type: 'ADD_CONTACT', payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
 
     // Clear State
     this.setState({
@@ -109,5 +113,3 @@ class AddContact extends Component {
     );
   }
 }
-
-export default AddContact;
