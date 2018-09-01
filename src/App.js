@@ -28,8 +28,8 @@ class App extends Component {
         <Router>
           <div className="App">
             <Header branding="Contact Manager" />
-            <p className="lead">React w/Redux</p>
             <div className="container">
+              <p className="lead">React w/Redux</p>
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContact} />
