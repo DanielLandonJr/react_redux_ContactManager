@@ -1,32 +1,18 @@
 import React, { Component } from 'react';
 import Contact from './Contact';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { GET_CONTACTS } from '../../actions/types';
 
-export default class Contacts extends Component {
-  state = {
-    contacts: [
-      {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        phone: '555-555-5555'
-      },
-      {
-        id: 2,
-        name: 'Karen Williams',
-        email: 'karen@gmail.com',
-        phone: '444-444-4444'
-      },
-      {
-        id: 3,
-        name: 'Henry Johnson',
-        email: 'henry@gmail.com',
-        phone: '333-333-333'
-      }
-    ]
-  };
+class Contacts extends Component {
+  componentDidMount() {
+    // puts the contacts into the props
+    this.props.getContacts();
+  }
 
   render() {
-    const { contacts } = this.state;
+    // since the data is in the props we want to get it out of props
+    const { contacts } = this.props;
     return (
       <React.Fragment>
         <h1 className="display-4 mb-2">
@@ -39,3 +25,23 @@ export default class Contacts extends Component {
     );
   }
 }
+
+Contacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  getContacts: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  // gives us access to props from state
+  contacts: state.contact.contacts
+});
+
+const mapDispatchToProps = dispatch => ({
+  // gives us access to GET_CONTACTS from state
+  getContacts: () => dispatch({ type: GET_CONTACTS })
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Contacts);
