@@ -25,11 +25,10 @@ class App extends Component {
     return (
       // need to wrap the app inside the provider
       <Provider store={store}>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <div className="App">
             <Header branding="Contact Manager" />
             <div className="container">
-              <p className="lead">React w/Redux</p>
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/contact/add" component={AddContact} />
