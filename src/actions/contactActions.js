@@ -21,24 +21,31 @@ export const getContacts = () => async dispatch => {
   }
 };
 
-// export const getContacts = () => {
-//   return {
-//     type: GET_CONTACTS
-//   };
-// };
-
-export const deleteContact = id => {
-  return {
-    type: DELETE_CONTACT,
-    payload: id
-  };
+export const deleteContact = id => async dispatch => {
+  try {
+    await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+    dispatch({
+      type: DELETE_CONTACT,
+      payload: id
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const addContact = contact => {
-  return {
-    type: ADD_CONTACT,
-    payload: contact
-  };
+export const addContact = contact => async dispatch => {
+  try {
+    const response = await axios.post(
+      `https://jsonplaceholder.typicode.com/users`,
+      contact
+    );
+    dispatch({
+      type: ADD_CONTACT,
+      payload: response.data
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const editContact = contact => {
@@ -47,3 +54,30 @@ export const editContact = contact => {
     payload: contact
   };
 };
+
+// export const getContacts = () => {
+//   return {
+//     type: GET_CONTACTS
+//   };
+// };
+
+// export const deleteContact = id => {
+//   return {
+//     type: DELETE_CONTACT,
+//     payload: id
+//   };
+// };
+
+// export const addContact = contact => {
+//   return {
+//     type: ADD_CONTACT,
+//     payload: contact
+//   };
+// };
+
+// export const editContact = contact => {
+//   return {
+//     type: EDIT_CONTACT,
+//     payload: contact
+//   };
+// };
