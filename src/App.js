@@ -28,6 +28,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Header branding="Contact Manager" />
+            <p className="lead">React w/Redux</p>
             <div className="container">
               <Switch>
                 <Route exact path="/" component={Contacts} />
